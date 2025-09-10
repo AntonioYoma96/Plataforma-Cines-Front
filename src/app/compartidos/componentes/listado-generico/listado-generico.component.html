@@ -1,0 +1,31 @@
+@if (!listado) {
+
+  <div #cargando>
+    <ng-content select="[cargando]"></ng-content>
+  </div>
+
+  <!-- el siguiente "cargando" dentro del "if" apunta al "#cargando" del div de arriba,
+   mientras que el "[cargando]" del select, referencia a una etiqueta con ese nombre (<div cargando> por ej.) que se entrega como proyección al llamar a este componente desde otro) -->
+
+  @if (!cargando.innerHTML.trim()) {
+    <img src="loading.gif">
+  }
+
+}
+@else if(listado.length === 0) {
+
+  <div #vacio>
+    <ng-content select="[vacio]"></ng-content>
+  </div>
+
+  @if (!vacio.innerHTML.trim()) {
+    <div>
+      <p>No hay elementos para mostrar</p>
+    </div>
+  }
+
+
+}
+@else {
+  <ng-content select="[contenido]"></ng-content>
+}
